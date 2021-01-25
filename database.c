@@ -1,8 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "stringLib.h"
+#include "database.h"
 
+void insert(char keyToValue[]){
+	FILE *file = fopen("Database","w");
+	char * first = &keyToValue[0];
+
+	fwrite(first,1,strlen(keyToValue),file);
+	fclose(file);
+
+}
+
+void readEverything(void){
+	FILE *file = fopen("Database","r");
+	char content[200] = "";
+	char * first = &content[0];
+	
+	fread(first,1,100,file);
+	fclose(file);
+	printf("%s\n", content);
+}
 
 char* getValue(char keyToValue[]) {
 
