@@ -4,8 +4,11 @@
 #include "database.h"
 
 void insert(char keyToValue[]){
-	FILE *file = fopen("Database","w");
+	FILE *file = fopen("Database","a");
 	char * first = &keyToValue[0];
+
+	//int num = fseek(file,0,SEEK_END);
+
 
 	fwrite(first,1,strlen(keyToValue),file);
 	fclose(file);
@@ -16,10 +19,11 @@ void readEverything(void){
 	FILE *file = fopen("Database","r");
 	char content[200] = "";
 	char * first = &content[0];
-	
+	// int num = fseek(file,0,SEEK_END);
 	fread(first,1,100,file);
-	fclose(file);
 	printf("%s\n", content);
+	fclose(file);
+
 }
 
 char* getValue(char keyToValue[]) {

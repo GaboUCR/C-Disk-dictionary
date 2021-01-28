@@ -1,0 +1,1 @@
+cl /Wall main.c Btree.c database.c /link /out:main.exe
