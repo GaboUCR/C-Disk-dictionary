@@ -3,6 +3,7 @@
 #include "database.h"
 #include <string.h>
 #include "Btree.h"
+#include "linkedList.h"
 
 int makeKey(char keyword[]){
 

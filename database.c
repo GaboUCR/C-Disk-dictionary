@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "database.h"
+#include "linkedList.h"
 
 void insert(char keyToValue[]){
 	FILE *file = fopen("Database","a");
