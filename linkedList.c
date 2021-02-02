@@ -5,9 +5,11 @@
 #include "Btree.h"
 #include "linkedList.h"
 
-l_node* makeListNode (int val){
+l_node* makeListNode (int val, char data[])
+{
 	l_node* newElement = malloc(sizeof(l_node));
 	newElement -> value = val;
+	newElement -> data = &data[0];
 	newElement -> previous = NULL;
 	newElement -> next = NULL;
 
@@ -22,15 +24,17 @@ l_node* sliceList (int start, int end, l_node* head){
 	for(int i=0; i < end; i++) {
 
 		if (i >= start){
-			newList = insertIntoList(current -> value, newList);
+
+			newList = insertIntoList(current -> value, current -> data ,newList);
 		}
 		current = current -> next;
 	}
 	return newList;
 }
 
-l_node* insertIntoList (int val, l_node* head){
-	l_node* newElement = makeListNode(val);
+l_node* insertIntoList (int val, char data[] ,l_node* head){
+
+	l_node* newElement = makeListNode(val,data);
 
 	//if head is null then we create the list
 	if (head == NULL){
@@ -81,7 +85,7 @@ void printList(l_node* head){
 	printf("[");
 
 	while(current != NULL){
-		printf("%d, ", current->value);
+		printf("%d : %s, ", current->value, current->data);
 		current = current -> next;
 	}
 
