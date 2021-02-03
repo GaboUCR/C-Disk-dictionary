@@ -12,4 +12,4 @@ node* listToTree (l_node* head, int length);
 
 void printTree(node* head);
 
-int findValue(node* head, int keyword);
+char* getKeyToValue(node* head, int keyword);

@@ -3,28 +3,59 @@
 #include <string.h>
 #include "database.h"
 #include "linkedList.h"
+#include "Btree.h"
 
 void insert(char keyToValue[]){
+
 	FILE *file = fopen("Database","a");
+
+	int key = makeKey(getKeyword(keyToValue));
+	char keyString[11];
+	sprintf(keyString,"%d", key);
+
 	char * first = &keyToValue[0];
+	int num = fseek(file,0,SEEK_END);
 
-	//int num = fseek(file,0,SEEK_END);
-
-
-	fwrite(first,1,strlen(keyToValue),file);
+	fwrite(&keyString[0], 1, 10, file);
+	fwrite(first, 1, 101, file);
 	fclose(file);
 
 }
 
-void readEverything(void){
-	FILE *file = fopen("Database","r");
-	char content[200] = "";
-	char * first = &content[0];
-	// int num = fseek(file,0,SEEK_END);
-	fread(first,1,100,file);
-	printf("%s\n", content);
-	fclose(file);
+l_node* makeListFromFile (char fileName[], int* numberOfElements){
 
+	l_node* head = NULL;
+
+	FILE *file = fopen(fileName,"r");
+	int num = fseek(file, 0, SEEK_END);
+	fpos_t end;
+	fgetpos(file, &end);
+
+	num = fseek(file ,0, SEEK_SET);
+	fpos_t current;
+	fgetpos(file ,&current);
+
+	while (current != end){
+
+		(*numberOfElements)++;
+		int intKey;
+		// char key[11];
+		// char keyToValue[102];
+		char* key = malloc(11);
+		char* keyToValue = malloc(102);
+
+		fread(&key[0],1,10,file);
+		fread(&keyToValue[0],1,101,file);
+
+		sscanf(key,"%d",&intKey);
+		head = insertIntoList(intKey,keyToValue,head);
+
+		fgetpos(file ,&current);
+
+	}
+
+	fclose(file);
+	return head;
 }
 
 char* getValue(char keyToValue[]) {

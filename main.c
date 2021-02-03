@@ -8,40 +8,21 @@
 
 int main(void){
 
-	//char lolo[] = "pedro:12414242525";
-	// char lola = "p";
-	//
-	//printf("keyword is: %d\n", makeKey(getKeyword(lolo)));
-	// insert(lolo);
-	// readEverything();
+	//char lolo[102] = "Merli:gato";
 
-	srand(time(0));
-	l_node* head = NULL;
-	int numElements = 1023;
+	// sscanf(lolo, "%d", &num);
+	// printf("%d\n", num+5);
 
-	for (int i=0; i < numElements; i++){
+	//printf("%s\n", lolo);
+	//insert(lolo);
+	int num = 0;
+	l_node* l = makeListFromFile("Database", &num);
 
-		head = insertIntoList(rand(), "patito",head);
-	}
-
-	//printList(head);
-	node* treeHead = listToTree(head,numElements);
-	int count = 0;
-	for (int i =0; i<numElements; i++){
-
-		int look = sliceList(i,i+1,head) -> value;
-		int times = findValue(treeHead,look);
-
-		if (times == 9){
-			count++;
-			// printf("%d\n", times);
-		}
-
-	}
-	printf("%d\n", count);
-	// printList(head);
-	// printf("tree: \n");
-	// printTree(treeHead);
+	// printList(l);
+	// printf("\n");
+	node* t = listToTree(l, num);
+	printf("%s\n", getValue(getKeyToValue(t,makeKey("garfield"))));
+	// printTree(t);
 
 	return 0;
 }

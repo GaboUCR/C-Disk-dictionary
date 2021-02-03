@@ -78,13 +78,11 @@ char* getKeyToValue(node* head, int keyword){
 		}
 
 		else if (keyword > current -> key ) {
-			counter ++;
 
 			current = current -> right;
 		}
 
 		else if (keyword < current -> key){
-			counter ++;
 
 			current = current -> left;
 		}
