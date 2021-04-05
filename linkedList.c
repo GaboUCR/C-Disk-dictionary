@@ -5,7 +5,8 @@
 #include "Btree.h"
 #include "linkedList.h"
 
-l_node* makeListNode (int val, char data[]){
+l_node* makeListNode (int val, char data[]) {
+
 	l_node* newElement = malloc(sizeof(l_node));
 	newElement -> value = val;
 	newElement -> data = &data[0];
@@ -82,7 +83,7 @@ void printList(l_node* head){
 	printf("[");
 
 	while(current != NULL){
-		
+
 		printf("key = %d and keyToValue = %s , ", current->value, current->data);
 		current = current -> next;
 	}
