@@ -7,3 +7,5 @@
 void insert(char key[], char value[]);
 
 l_node* makeListFromFile (char fileName[], int* numberOfElements);
+
+fpos_t getFileSize();

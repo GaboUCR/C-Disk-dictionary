@@ -5,7 +5,7 @@
 #include "Btree.h"
 #include "linkedList.h"
 
-l_node* makeListNode (char* key, char* value) {
+l_node* makeListNode (char key[], char value[]) {
 
 	l_node* newElement = malloc(sizeof(l_node));
 	newElement -> key = key;
@@ -13,6 +13,20 @@ l_node* makeListNode (char* key, char* value) {
 	newElement -> previous = NULL;
 	newElement -> next = NULL;
 	return newElement;
+}
+
+void getValue(char key[], l_node* head){
+	l_node* current = head;
+
+	while (current != NULL){
+
+		if (strcmp(current -> key, key) == 0){
+			printf("%s\n", current -> value);
+		}
+		current = current -> next;
+
+	}
+
 }
 
 l_node* sliceList (int start, int end, l_node* head){
@@ -31,7 +45,7 @@ l_node* sliceList (int start, int end, l_node* head){
 	return newList;
 }
 
-l_node* insertIntoList (char* key, char* value ,l_node* head){
+l_node* insertIntoList (char key[], char value[] ,l_node* head){
 
 	l_node* newElement = makeListNode(key, value);
 	//if head is null then we create the list

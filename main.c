@@ -8,32 +8,41 @@
 
 int main(void){
 
+
 	int num = 0;
 	l_node* head = makeListFromFile("Database", &num);
-	// l_node* head = NULL;
 
-	// insert("petrofsafef","perrgro");
-	// insert("petrofsfef","perrgrdgo");
-	// insert("petrothfth","perrdfgo");
-	// insert("petrojydj","perrogg");
-	// insert("petrogrgsrg","pegdrgrrro");
 
-	// static char z [] = "podomeos";
-	// static char p [] = "forcfafefes";
-	// static char s [] = "forcoggddf";
-	// static char g [] = "forcgnhtht";
-	// static char h [] = "forcvewdgr";
-	// //
-	// head = insertIntoList(p,"finca", head);
-	// head = insertIntoList(s,"finca", head);
-	// head = insertIntoList(z,"finca", head);
-	// head = insertIntoList(g,"finca", head);
-	// head = insertIntoList(h,"finca", head);
+	while (1){
 
-	// printList(l);
-	// printf("\n");
-	node* t = listToTree(head, num);
-	printTree(t);
+
+		printList(head);
+		printf("\n");
+
+		char input[30] = "";
+		printf(">>");
+		fgets(input, 30, stdin);
+		char* p = strtok(input, " ");
+		char *array[3];
+		int i = 0;
+
+    while (p != NULL)
+    {
+        array[i++] = p;
+        p = strtok (NULL, " ");
+    }
+
+
+		if (strcmp(array[0],"set") == 0){
+			insert(array[1], array[2]);
+			head = insertIntoList(array[1], array[2], head);
+		}
+
+		if (strcmp(array[0],"get") == 0){
+			getValue(array[1], head);
+		}
+
+}
 
 	return 0;
 }

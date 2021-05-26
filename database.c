@@ -5,14 +5,23 @@
 #include "linkedList.h"
 #include "Btree.h"
 
+fpos_t getFileSize(){
+
+	FILE *file = fopen("Database","a");
+	int num = fseek(file,0,SEEK_END);
+	fpos_t pos;
+
+	fgetpos(file ,&pos);
+	fclose(file);
+
+	return pos;
+
+}
+
 void insert(char key[], char value[]){
 
 	FILE *file = fopen("Database","a");
 
-	// char keyString[11];
-	// sprintf(keyString,"%d", key);
-	//
-	// char * first = &keyToValue[0];
 	int num = fseek(file,0,SEEK_END);
 
 	fwrite(key, 1, 15, file);

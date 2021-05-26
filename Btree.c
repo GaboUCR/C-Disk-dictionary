@@ -6,7 +6,7 @@
 #include "linkedList.h"
 
 
-node* makeNode(char* key, char* value){
+node* makeNode(char key[], char value[]){
 
 	node* newNode = malloc(sizeof(node));
 	newNode -> value = value;
@@ -51,33 +51,33 @@ node* listToTree (l_node* head, int length){
 
 	return root;
 }
-
-char* getValue(node* head, char key[]){
-
-	node* current = head;
-
-	while (current != NULL){
-
-		int comp = strcmp(key, current -> key);
-
-		if (comp == 0){
-
-			return current -> value;
-		}
-
-		else if (comp > 0) {
-
-			current = current -> right;
-		}
-
-		else if (comp < 0){
-
-			current = current -> left;
-		}
-	}
-
-	return "";
-}
+//
+// char* getValue(node* head, char key[]){
+//
+// 	node* current = head;
+//
+// 	while (current != NULL){
+//
+// 		int comp = strcmp(key, current -> key);
+//
+// 		if (comp == 0){
+//
+// 			return current -> value;
+// 		}
+//
+// 		else if (comp > 0) {
+//
+// 			current = current -> right;
+// 		}
+//
+// 		else if (comp < 0){
+//
+// 			current = current -> left;
+// 		}
+// 	}
+//
+// 	return "";
+// }
 
 void printTree(node* head){
 
