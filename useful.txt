@@ -1,1 +1,1 @@
-cl /Wall main.c Btree.c linkedList.c database.c /link /out:main.exe
+gcc main.c Btree.c linkedList.c database.c -o main

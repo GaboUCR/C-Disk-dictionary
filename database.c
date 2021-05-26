@@ -5,19 +5,18 @@
 #include "linkedList.h"
 #include "Btree.h"
 
-void insert(char keyToValue[]){
+void insert(char key[], char value[]){
 
 	FILE *file = fopen("Database","a");
 
-	int key = makeKey(getKeyword(keyToValue));
-	char keyString[11];
-	sprintf(keyString,"%d", key);
-
-	char * first = &keyToValue[0];
+	// char keyString[11];
+	// sprintf(keyString,"%d", key);
+	//
+	// char * first = &keyToValue[0];
 	int num = fseek(file,0,SEEK_END);
 
-	fwrite(&keyString[0], 1, 10, file);
-	fwrite(first, 1, 101, file);
+	fwrite(key, 1, 15, file);
+	fwrite(value, 1, 15, file);
 	fclose(file);
 
 }
@@ -38,17 +37,13 @@ l_node* makeListFromFile (char fileName[], int* numberOfElements){
 	while (current != end){
 
 		(*numberOfElements)++;
-		int intKey;
-		// char key[11];
-		// char keyToValue[102];
-		char* key = malloc(11);
-		char* keyToValue = malloc(102);
+		char* key = malloc(16);
+		char* value = malloc(16);
 
-		fread(&key[0],1,10,file);
-		fread(&keyToValue[0],1,101,file);
+		fread(&key[0],1,15,file);
+		fread(&value[0],1,15,file);
 
-		sscanf(key,"%d",&intKey);
-		head = insertIntoList(intKey,keyToValue,head);
+		head = insertIntoList(key,value,head);
 
 		fgetpos(file ,&current);
 
@@ -58,56 +53,56 @@ l_node* makeListFromFile (char fileName[], int* numberOfElements){
 	return head;
 }
 
-char* getValue(char keyToValue[]) {
-
-	int length = strlen(keyToValue);
-	static char value[51] = "";
-	int start = 0;
-	//printf("%d\n", length);
-	// printf("%s\n", value);
-
-	for (int i=0; i<length; i++){
-
-		//58 is : in ascii
-		if (keyToValue[i] == 58){
-			i++;
-			start = i;
-			break;
-		}
-	}
-	int keyToValueIndex = start;
-
-	if(length-start >= 50){
-		return "";
-	}
-
-	for (int j = 0; j < length - start; j++){
-		*(&value[j]) = keyToValue[keyToValueIndex];
-		keyToValueIndex++;
-	}
-
-	return value;
-}
-
-char* getKeyword(char keyToValue[]) {
-
-	int length = strlen(keyToValue);
-	static char keyword[51] = "";
-
-	for (int i=0; i<length; i++){
-
-		//58 is : in ascii
-		if (keyToValue[i] == 58){
-			break;
-		}
-		//the keyword can only be 50 characters long
-		if (i == 50){
-
-			return "";
-		}
-
-		*(&keyword[i]) = keyToValue[i];
-	}
-
-	return keyword;
-}
+// char* getValue(char keyToValue[]) {
+//
+// 	int length = strlen(keyToValue);
+// 	static char value[51] = "";
+// 	int start = 0;
+// 	//printf("%d\n", length);
+// 	// printf("%s\n", value);
+//
+// 	for (int i=0; i<length; i++){
+//
+// 		//58 is : in ascii
+// 		if (keyToValue[i] == 58){
+// 			i++;
+// 			start = i;
+// 			break;
+// 		}
+// 	}
+// 	int keyToValueIndex = start;
+//
+// 	if(length-start >= 50){
+// 		return "";
+// 	}
+//
+// 	for (int j = 0; j < length - start; j++){
+// 		*(&value[j]) = keyToValue[keyToValueIndex];
+// 		keyToValueIndex++;
+// 	}
+//
+// 	return value;
+// }
+//
+// char* getKeyword(char keyToValue[]) {
+//
+// 	int length = strlen(keyToValue);
+// 	static char keyword[51] = "";
+//
+// 	for (int i=0; i<length; i++){
+//
+// 		//58 is : in ascii
+// 		if (keyToValue[i] == 58){
+// 			break;
+// 		}
+// 		//the keyword can only be 50 characters long
+// 		if (i == 50){
+//
+// 			return "";
+// 		}
+//
+// 		*(&keyword[i]) = keyToValue[i];
+// 	}
+//
+// 	return keyword;
+// }

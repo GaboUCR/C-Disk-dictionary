@@ -2,14 +2,12 @@
 
 typedef enum {FALSE=0, TRUE=1} bool;
 
-typedef struct node_t {struct node* left; struct node* right; int key; char* data;} node;
+typedef struct node_t {struct node_t* left; struct node_t* right; char* key; char* value;} node;
 
-int makeKey(char keyword[]);
-
-node* makeNode(int key, char data[]);
+node* makeNode(char* key, char* value);
 
 node* listToTree (l_node* head, int length);
 
 void printTree(node* head);
 
-char* getKeyToValue(node* head, int keyword);
+char* getValue(node* head, char key[]);

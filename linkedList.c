@@ -5,11 +5,11 @@
 #include "Btree.h"
 #include "linkedList.h"
 
-l_node* makeListNode (int val, char data[]) {
+l_node* makeListNode (char* key, char* value) {
 
 	l_node* newElement = malloc(sizeof(l_node));
-	newElement -> value = val;
-	newElement -> data = &data[0];
+	newElement -> key = key;
+	newElement -> value = value;
 	newElement -> previous = NULL;
 	newElement -> next = NULL;
 	return newElement;
@@ -24,24 +24,24 @@ l_node* sliceList (int start, int end, l_node* head){
 
 		if (i >= start){
 
-			newList = insertIntoList(current -> value, current -> data ,newList);
+			newList = insertIntoList(current -> key, current -> value ,newList);
 		}
 		current = current -> next;
 	}
 	return newList;
 }
 
-l_node* insertIntoList (int val, char data[] ,l_node* head){
+l_node* insertIntoList (char* key, char* value ,l_node* head){
 
-	l_node* newElement = makeListNode(val,data);
+	l_node* newElement = makeListNode(key, value);
 	//if head is null then we create the list
 	if (head == NULL){
 		return newElement;
 	}
 
-	l_node* current = head;
+	int comp = strcmp(key, head -> key);
 
-	if (head -> value < val){
+	if (comp > 0){
 
 		head -> previous = newElement;
 		newElement -> next = head;
@@ -49,9 +49,12 @@ l_node* insertIntoList (int val, char data[] ,l_node* head){
 		return newElement;
 	}
 
-	while(TRUE){
+	l_node* current = head->next;
 
-		if (current->value < val){
+	while(TRUE){
+		comp = strcmp(key, current -> key);
+
+		if (comp > 0){
 
 			newElement -> previous = current -> previous;
 			newElement -> next = current;
@@ -84,7 +87,7 @@ void printList(l_node* head){
 
 	while(current != NULL){
 
-		printf("key = %d and keyToValue = %s , ", current->value, current->data);
+		printf("%s:%s , ", current->key, current->value);
 		current = current -> next;
 	}
 
